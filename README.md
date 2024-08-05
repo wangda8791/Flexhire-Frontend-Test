@@ -9,4 +9,5 @@ This is a small prototype application to view basic data from the Flexhire API.
    ```bash
    npm install
 3. Run the application
+   ```bash
    npm start
