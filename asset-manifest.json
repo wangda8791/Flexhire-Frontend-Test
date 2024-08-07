@@ -1,10 +1,10 @@
 {
   "files": {
-    "main.css": "/static/css/main.e6c13ad2.css",
-    "main.js": "/static/js/main.bd3e757d.js",
-    "index.html": "/index.html",
-    "main.e6c13ad2.css.map": "/static/css/main.e6c13ad2.css.map",
-    "main.bd3e757d.js.map": "/static/js/main.bd3e757d.js.map"
+    "main.css": "/flexhire-frontend-test/static/css/main.e6c13ad2.css",
+    "main.js": "/flexhire-frontend-test/static/js/main.bd3e757d.js",
+    "index.html": "/flexhire-frontend-test/index.html",
+    "main.e6c13ad2.css.map": "/flexhire-frontend-test/static/css/main.e6c13ad2.css.map",
+    "main.bd3e757d.js.map": "/flexhire-frontend-test/static/js/main.bd3e757d.js.map"
   },
   "entrypoints": [
     "static/css/main.e6c13ad2.css",
