@@ -1,25 +1,42 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { useLazyQuery } from '@apollo/client';
+import { GET_PROFILE } from '../queries';
+import { useApolloClient } from '../ApolloContext';
 
-const Profile = ({ apiKey }) => {
-  const [profile, setProfile] = useState(null);
+const Profile = () => {
+  const [apiKey, setApiKey] = useState('');
+  const { updateClient } = useApolloClient();
+  const [getProfile, { loading, data, error }] = useLazyQuery(GET_PROFILE);
 
   useEffect(() => {
     if (apiKey) {
-      axios.get('https://api.flexhire.com/api/v2/profile', {
-        headers: { 'FLEXHIRE-API-KEY': `${apiKey}` }
-      })
-      .then(response => setProfile(response.data))
-      .catch(error => console.error('Error fetching profile:', error));
+      updateClient(apiKey);
+      getProfile();
     }
-  }, [apiKey]);
+  }, [apiKey, updateClient, getProfile]);
 
-  if (!profile) return <div>Loading...</div>;
+  const handleFetchProfile = () => {
+    getProfile();
+  };
 
   return (
     <div>
-      <img src={profile.currentUser.avatarUrl} alt={`${profile.currentUser.name}'s avatar`} />
-      <h1>{profile.currentUser.name}</h1>
+      <h1>Profile</h1>
+      <input 
+        type="text" 
+        placeholder="Enter API Key" 
+        value={apiKey} 
+        onChange={(e) => setApiKey(e.target.value)} 
+      />
+      <button onClick={handleFetchProfile}>Fetch Profile</button>
+      {loading && <p>Loading...</p>}
+      {error && <p>Error: {error.message}</p>}
+      {data && (
+        <div>
+          <img src={data.currentUser.avatarUrl} alt="Avatar" />
+          <h2>{data.currentUser.name}</h2>
+        </div>
+      )}
     </div>
   );
 };
